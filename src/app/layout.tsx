@@ -1,15 +1,15 @@
 import type { Metadata } from 'next'
-import { Inter, DM_Serif_Text } from 'next/font/google'
+import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Header } from '@/components/header'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const dmSerifText = DM_Serif_Text({
-  weight: '400',
+const playfair = Playfair_Display({
+  weight: '900',
   subsets: ['latin'],
-  variable: '--font-dm-serif',
+  variable: '--font-playfair',
 })
 
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" suppressHydrationWarning className={dmSerifText.variable}>
+    <html lang="fr" suppressHydrationWarning className={playfair.variable}>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"

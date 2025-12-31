@@ -23,7 +23,7 @@ const projects: Project[] = [
     slug: 'hub',
     name: 'Hub',
     description: 'Plateforme de dashboards webmarketing',
-    status: 'active',
+    status: 'draft',
     color: 'indigo',
     type: 'platform',
   },
@@ -90,7 +90,9 @@ export default function ProjectsPage() {
               <button
                 key={project.id}
                 onClick={() => router.push(`/projects/${project.slug}`)}
-                className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 text-left hover:border-indigo-500/50 hover:shadow-md dark:hover:bg-slate-900 transition-all group"
+                className={`bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 text-left hover:border-indigo-500/50 hover:shadow-md dark:hover:bg-slate-900 transition-all group ${
+                  project.status !== 'active' ? 'opacity-60 hover:opacity-100' : ''
+                }`}
               >
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 border ${colorClasses[project.color]}`}>
                   <Icon className="w-6 h-6" />
@@ -117,11 +119,15 @@ export default function ProjectsPage() {
                     </span>
                   )}
                   {/* Status badge */}
-                  {project.status === 'active' && (
-                    <span className="text-xs px-2 py-1 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400">
-                      Actif
-                    </span>
-                  )}
+                  <span className={`text-xs px-2 py-1 rounded-full ${
+                    project.status === 'active'
+                      ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400'
+                      : project.status === 'draft'
+                      ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400'
+                      : 'bg-slate-100 dark:bg-slate-500/20 text-slate-500 dark:text-slate-400'
+                  }`}>
+                    {project.status === 'active' ? 'Actif' : project.status === 'draft' ? 'Brouillon' : 'Archivé'}
+                  </span>
                 </div>
               </button>
             )

@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['var(--font-dm-serif)', 'serif'],
+        playfair: ['var(--font-playfair)', 'serif'],
       },
       colors: {
         border: 'hsl(var(--border))',
@@ -54,7 +54,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
 }
 
 export default config

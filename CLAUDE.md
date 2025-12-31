@@ -375,7 +375,9 @@ Cela permet de visualiser rapidement l'avis de Claude, même après une longue a
 ### Code
 - TypeScript obligatoire
 - Conventions Next.js App Router
-- Composants avec shadcn/ui + Tailwind
+- **Composants UI : toujours shadcn/ui** (Card, Button, Toggle, Input, etc.)
+- Tailwind uniquement pour layout (grid, flex, gap, spacing) et couleurs custom
+- Ne jamais créer de composants UI en Tailwind pur si un équivalent shadcn/ui existe
 - Fichiers en kebab-case, composants en PascalCase
 - Icônes Lucide React (pas d'emojis dans l'interface)
 
@@ -396,7 +398,7 @@ Cela permet de visualiser rapidement l'avis de Claude, même après une longue a
 - [ ] Structure Next.js avec navigation par onglets
 - [ ] Template de projet (onglets standards)
 - [ ] Affichage markdown par onglet
-- [ ] Premier projet : Hub
+- [ ] Premier projet : OGS (Outil de gestion SEO : module de la plateforme Hub)
 - [ ] Dark / Light mode (toggle)
 - [ ] Déploiement Vercel
 

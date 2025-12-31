@@ -8,6 +8,10 @@ import {
   Boxes, Puzzle, LayoutGrid, Plus
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { ObjectifsTab } from '@/components/tabs/objectifs-tab'
+import { RolesTab } from '@/components/tabs/roles-tab'
+import { AgentsTab } from '@/components/tabs/agents-tab'
+import { ArchitectureTab } from '@/components/tabs/architecture-tab'
 
 type ProjectType = 'platform' | 'module'
 
@@ -32,7 +36,7 @@ const projectsData: Record<string, ProjectData> = {
     description: 'Plateforme de dashboards webmarketing',
     type: 'platform',
     color: 'indigo',
-    status: 'active',
+    status: 'draft',
   },
   ogs: {
     id: '2',
@@ -161,57 +165,65 @@ export default function ProjectPage() {
 }
 
 function TabContent({ tabId, projectSlug }: { tabId: string; projectSlug: string }) {
-  // Contenu placeholder pour chaque onglet
-  const content: Record<string, { title: string; description: string }> = {
-    objectifs: {
-      title: 'Objectifs',
-      description: 'D\u00e9finissez le probl\u00e8me, la solution et les objectifs cl\u00e9s du projet.',
-    },
-    roles: {
-      title: 'R\u00f4les',
-      description: 'Swimlane des acteurs et responsabilit\u00e9s.',
-    },
-    architecture: {
-      title: 'Architecture',
-      description: 'Stack technique, sch\u00e9mas et choix technologiques.',
-    },
-    features: {
-      title: 'Fonctionnalit\u00e9s',
-      description: 'Liste des features \u00e0 int\u00e9grer.',
-    },
-    roadmap: {
-      title: 'Roadmap',
-      description: 'R\u00e9troplanning, versioning et jalons.',
-    },
-    notice: {
-      title: 'Notice',
-      description: 'Documentation utilisateur de l\'outil.',
-    },
-    agents: {
-      title: 'Agents IA',
-      description: 'Configuration des agents IA du projet.',
-    },
-    changelog: {
-      title: 'Changelog',
-      description: 'Historique des modifications.',
-    },
-    liens: {
-      title: 'Liens',
-      description: 'Ressources et liens utiles.',
-    },
+  // Onglet Objectifs - composant dédié
+  if (tabId === 'objectifs') {
+    return (
+      <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-8">
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Objectifs</h2>
+        <p className="text-slate-500 dark:text-slate-400 mb-6">Problème, solution et objectifs clés du projet</p>
+        <ObjectifsTab />
+      </div>
+    )
   }
 
-  const tab = content[tabId] || { title: 'Onglet', description: '' }
+  // Onglet Rôles - Swimlane diagram
+  if (tabId === 'roles') {
+    return (
+      <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-8">
+        <RolesTab />
+      </div>
+    )
+  }
+
+  // Onglet Agents IA
+  if (tabId === 'agents') {
+    return (
+      <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-8">
+        <AgentsTab />
+      </div>
+    )
+  }
+
+  // Onglet Architecture
+  if (tabId === 'architecture') {
+    return (
+      <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-8">
+        <ArchitectureTab />
+      </div>
+    )
+  }
+
+  // Autres onglets - placeholder
+  const tabInfo: Record<string, { title: string; description: string }> = {
+    architecture: { title: 'Architecture', description: 'Stack technique et choix technologiques' },
+    features: { title: 'Fonctionnalités', description: 'Liste des features à développer' },
+    roadmap: { title: 'Roadmap', description: 'Planning et jalons du projet' },
+    notice: { title: 'Notice', description: 'Documentation utilisateur' },
+    agents: { title: 'Agents IA', description: 'Configuration des agents IA' },
+    changelog: { title: 'Changelog', description: 'Historique des modifications' },
+    liens: { title: 'Liens', description: 'Ressources et liens utiles' },
+  }
+
+  const tab = tabInfo[tabId] || { title: 'Onglet', description: '' }
 
   return (
     <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-8">
       <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{tab.title}</h2>
       <p className="text-slate-500 dark:text-slate-400 mb-6">{tab.description}</p>
 
-      {/* Placeholder content */}
       <div className="border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-lg p-12 text-center">
         <p className="text-slate-400 dark:text-slate-500">
-          Contenu markdown &agrave; venir...
+          Contenu à construire ensemble
         </p>
         <p className="text-sm text-slate-300 dark:text-slate-600 mt-2">
           (Projet: {projectSlug} / Onglet: {tabId})
@@ -258,7 +270,9 @@ function ModulesTab({ platformSlug }: { platformSlug: string }) {
           <button
             key={module.id}
             onClick={() => router.push(`/projects/${module.slug}`)}
-            className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 text-left hover:border-purple-500/50 hover:shadow-md dark:hover:bg-slate-900 transition-all group"
+            className={`bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 text-left hover:border-purple-500/50 hover:shadow-md dark:hover:bg-slate-900 transition-all group ${
+              module.status !== 'active' ? 'opacity-60 hover:opacity-100' : ''
+            }`}
           >
             <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 border ${colorClasses[module.color] || colorClasses.purple}`}>
               <Puzzle className="w-6 h-6" />
@@ -273,11 +287,15 @@ function ModulesTab({ platformSlug }: { platformSlug: string }) {
               <span className="text-xs px-2 py-1 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-400">
                 Module
               </span>
-              {module.status === 'active' && (
-                <span className="text-xs px-2 py-1 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400">
-                  Actif
-                </span>
-              )}
+              <span className={`text-xs px-2 py-1 rounded-full ${
+                module.status === 'active'
+                  ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400'
+                  : module.status === 'draft'
+                  ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400'
+                  : 'bg-slate-100 dark:bg-slate-500/20 text-slate-500 dark:text-slate-400'
+              }`}>
+                {module.status === 'active' ? 'Actif' : module.status === 'draft' ? 'Brouillon' : 'Archivé'}
+              </span>
             </div>
           </button>
         ))}

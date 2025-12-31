@@ -29,7 +29,7 @@ export function Header() {
             </Link>
           ) : (
             <Link href="/projects" className="flex items-center">
-              <span className="font-serif text-2xl text-slate-900 dark:text-white">
+              <span className="font-playfair text-2xl text-slate-900 dark:text-white">
                 Cockpit.
               </span>
             </Link>
