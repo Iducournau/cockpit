@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { Gauge, Mail } from 'lucide-react'
+import { Mail } from 'lucide-react'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -17,11 +17,10 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-indigo-600 rounded-2xl mb-4">
-            <Gauge className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">COCKPIT</h1>
-          <p className="text-slate-500 dark:text-slate-400 mt-2">
+          <h1 className="font-serif text-5xl text-slate-900 dark:text-white mb-4">
+            Cockpit.
+          </h1>
+          <p className="text-slate-500 dark:text-slate-400">
             Outil de pilotage de projets YouSchool
           </p>
         </div>
@@ -62,7 +61,7 @@ export default function LoginPage() {
 
         {/* Footer */}
         <p className="text-center text-xs text-slate-400 dark:text-slate-600 mt-6">
-          COCKPIT &bull; YouSchool &bull; Acc&egrave;s r&eacute;serv&eacute;
+          Cockpit. &bull; YouSchool &bull; Acc&egrave;s r&eacute;serv&eacute;
         </p>
       </div>
     </div>

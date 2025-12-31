@@ -3,8 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTheme } from 'next-themes'
-import { Gauge, Moon, Sun, User, ArrowLeft } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { Moon, Sun, User, ArrowLeft } from 'lucide-react'
 
 export function Header() {
   const pathname = usePathname()
@@ -29,11 +28,10 @@ export function Header() {
               <span className="text-sm font-medium">Projets</span>
             </Link>
           ) : (
-            <Link href="/projects" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-                <Gauge className="w-5 h-5 text-white" />
-              </div>
-              <span className="font-bold text-slate-900 dark:text-white">COCKPIT</span>
+            <Link href="/projects" className="flex items-center">
+              <span className="font-serif text-2xl text-slate-900 dark:text-white">
+                Cockpit.
+              </span>
             </Link>
           )}
         </div>
